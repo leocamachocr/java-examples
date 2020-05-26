@@ -1,7 +1,6 @@
 package com.leoc.threads.locks.write;
 
 import java.util.Random;
-
 import static com.leoc.util.Output.ANSI_RESET;
 
 public class Client implements Runnable {

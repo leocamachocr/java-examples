@@ -1,4 +1,4 @@
-package com.leoc.threads.race;
+package com.leoc.threads.executor;
 
 public class UsingThreadClass {
 

@@ -6,9 +6,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static com.leoc.util.Output.ANSI_RESET;
 
-/**
- * This is a demo
- */
 public class Bar {
     private ReadWriteLock lock = new ReentrantReadWriteLock();
     private Random random = new Random();

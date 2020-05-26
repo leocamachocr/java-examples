@@ -1,4 +1,4 @@
-package com.leoc.threads.race;
+package com.leoc.threads.executor;
 
 import java.util.Random;
 
