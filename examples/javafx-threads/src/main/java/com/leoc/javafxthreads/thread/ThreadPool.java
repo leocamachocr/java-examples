@@ -1,4 +1,4 @@
-package com.leoc.javaxthreads.thread;
+package com.leoc.javafxthreads.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

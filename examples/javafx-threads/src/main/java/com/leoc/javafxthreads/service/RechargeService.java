@@ -1,7 +1,7 @@
-package com.leoc.javaxthreads.service;
+package com.leoc.javafxthreads.service;
 
-import com.leoc.javaxthreads.thread.ThreadPool;
-import com.leoc.javaxthreads.provider.SMSProviderAPI;
+import com.leoc.javafxthreads.thread.ThreadPool;
+import com.leoc.javafxthreads.provider.SMSProviderAPI;
 
 import java.util.HashMap;
 import java.util.Map;

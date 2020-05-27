@@ -1,8 +1,8 @@
-package com.leoc.javaxthreads;
+package com.leoc.javafxthreads;
 
-import com.leoc.javaxthreads.service.RechargeService;
-import com.leoc.javaxthreads.thread.ThreadPool;
-import com.leoc.javaxthreads.provider.SMSProviderAPIImpl;
+import com.leoc.javafxthreads.service.RechargeService;
+import com.leoc.javafxthreads.thread.ThreadPool;
+import com.leoc.javafxthreads.provider.SMSProviderAPIImpl;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;

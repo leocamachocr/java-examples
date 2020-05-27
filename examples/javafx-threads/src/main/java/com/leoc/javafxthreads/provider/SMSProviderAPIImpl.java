@@ -1,4 +1,4 @@
-package com.leoc.javaxthreads.provider;
+package com.leoc.javafxthreads.provider;
 
 import java.util.Random;
 

@@ -10,10 +10,10 @@ public class MailDemo {
         BlockingQueue<String> letters = new LinkedBlockingQueue<>();
         ExecutorService service = Executors.newCachedThreadPool();
 
-        service.submit(new LetterWriter(letters));
-        service.submit(new Postman(letters));
-        service.submit(new Postman(letters));
-        service.submit(new Postman(letters));
+        service.submit(new LetterWriter(letters));//<2 seg
+        service.submit(new Postman(letters));//<5 seg
+        service.submit(new Postman(letters));//<5 seg
+        service.submit(new Postman(letters));//<5 seg
         service.shutdown();
 
     }

@@ -1,5 +1,6 @@
 package com.leoc.threads.cyclicbarrier;
 
+import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.ExecutorService;
@@ -9,13 +10,14 @@ public class Race {
     private Racer racer1;
     private Racer racer2;
     private Racer racer3;
-    private CyclicBarrier cyclicBarrier = new CyclicBarrier(3, () -> {
-        System.out.println("Todos los corredores terminaron");
-    });
+    private CyclicBarrier cyclicBarrier;
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
         Race race = new Race();
         race.prepareRacer();
+        race.startRace();
+        System.out.println("Second Round---------------------------------");
+        Thread.sleep(10000);
         race.startRace();
     }
 

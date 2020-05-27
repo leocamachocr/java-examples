@@ -1,8 +1,8 @@
-package com.leoc.javaxthreads.fx;
+package com.leoc.javafxthreads.fx;
 
-import com.leoc.javaxthreads.service.RechargeService;
-import com.leoc.javaxthreads.thread.ThreadPool;
-import com.leoc.javaxthreads.provider.SMSProviderAPIImpl;
+import com.leoc.javafxthreads.service.RechargeService;
+import com.leoc.javafxthreads.thread.ThreadPool;
+import com.leoc.javafxthreads.provider.SMSProviderAPIImpl;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-import static com.leoc.javaxthreads.fx.UIConstants.*;
+import static com.leoc.javafxthreads.fx.UIConstants.*;
 
 public class SmsUI extends Application {
 

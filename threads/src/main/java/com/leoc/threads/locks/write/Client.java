@@ -8,6 +8,7 @@ public class Client implements Runnable {
     private final String name;
     private final Random random = new Random();
     private final String color;
+    private boolean needInvoice;
 
     public Client(String name, String color, Bar bar) {
         this.name = name;
@@ -23,7 +24,7 @@ public class Client implements Runnable {
                 Thread.sleep(random.nextInt(10000));
                 System.out.printf("%s%s: may I have a beer?\n%s", color, name, ANSI_RESET);
                 bar.getBeer(this);
-                if (random.nextBoolean()) {
+                if (needInvoice) {
                     System.out.printf("%s%s Can you give me the invoice?\n%s", color, name, ANSI_RESET);
                     bar.pay(this);
                 }
@@ -31,6 +32,11 @@ public class Client implements Runnable {
             }
 
         }
+    }
+
+    public void needInvoice() {//true
+        this.needInvoice = true;
+
     }
 
     public String getName() {

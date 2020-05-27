@@ -9,11 +9,14 @@ public class LockDemo {
     public static void main(String[] args) {
         Bar bar = new Bar();
         ExecutorService service = Executors.newCachedThreadPool();
-        service.submit(new Client("John",ANSI_RED, bar));
-        service.submit(new Client("Dave",ANSI_BLUE, bar));
-        service.submit(new Client("Gabe",ANSI_YELLOW, bar));
-        service.submit(new Client("Robi",ANSI_GREEN, bar));
-        service.submit(new Client("Marg",ANSI_CYAN, bar));
-        service.submit(new Client("Till",ANSI_PURPLE, bar));
+        Client john = new Client("John", ANSI_RED, bar);
+        service.submit(john);
+        service.submit(new Client("Dave", ANSI_BLUE, bar));
+        service.submit(new Client("Gabe", ANSI_YELLOW, bar));
+        service.submit(new Client("Robi", ANSI_GREEN, bar));
+        service.submit(new Client("Marg", ANSI_CYAN, bar));
+        service.submit(new Client("Till", ANSI_PURPLE, bar));
+
+        john.needInvoice();
     }
 }

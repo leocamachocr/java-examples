@@ -37,6 +37,5 @@ public class Race {
         threadExecutor.execute(new Racer("Batman", phaser));
         threadExecutor.execute(new Racer("Joker", phaser));
         phaser.arriveAndAwaitAdvance();
-        System.out.printf("Phase %d starts\n", phaser.getPhase());
     }
 }

@@ -8,7 +8,7 @@ public class Race {
     private Racer racer1;
     private Racer racer2;
     private Racer racer3;
-    private CountDownLatch countDownLatch = new CountDownLatch(3);
+    private CountDownLatch countDownLatch;
 
     public static void main(String args[]) {
         Race race = new Race();
@@ -30,9 +30,5 @@ public class Race {
         threadExecutor.execute(racer2);
         threadExecutor.execute(racer3);
         threadExecutor.shutdown();
-        try {
-            countDownLatch.await();
-            System.out.println("Todos los corredores terminaron la tarea");
-        } catch (InterruptedException e) {/*TODO manejar exception*/}
     }
 }

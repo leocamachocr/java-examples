@@ -8,9 +8,9 @@ public class Racer implements Runnable {
     private String name;
     private CyclicBarrier cyclicBarrier;
 
-    public Racer(String name, CyclicBarrier countDownLatch) {
+    public Racer(String name, CyclicBarrier cyclicBarrier) {
         this.name = name;
-        this.cyclicBarrier = countDownLatch;
+        this.cyclicBarrier = cyclicBarrier;
     }
 
     @Override

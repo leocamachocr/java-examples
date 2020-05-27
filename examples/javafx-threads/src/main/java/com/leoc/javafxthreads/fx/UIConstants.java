@@ -1,4 +1,4 @@
-package com.leoc.javaxthreads.fx;
+package com.leoc.javafxthreads.fx;
 
 public class UIConstants {
     public static final int LABEL_WITH=250;
