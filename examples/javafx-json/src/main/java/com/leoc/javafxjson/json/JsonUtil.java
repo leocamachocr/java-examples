@@ -1,4 +1,4 @@
-package com.leoc.json.football;
+package com.leoc.javafxjson.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

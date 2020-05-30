@@ -63,10 +63,13 @@ public class JsonUtilTests {
         tournaments.add("UCL");
         borussiaDormund.setTournaments(tournaments);
         JsonUtil util = new JsonUtil();
-        File teamFile = File.createTempFile("test", ".json");
-        util.toFile(teamFile,borussiaDormund);
+        File teamFile = new File("C:\\Users\\leoca\\AppData\\Local\\Temp\\test11538312587372549655.json");
+        List<Team> teams = new ArrayList<>();
+        teams.add(borussiaDormund);
+        teams.add(borussiaDormund);
+        util.toFile(teamFile, teams);
         System.out.println("File created:" + teamFile.getAbsolutePath());
-        Team bdParsed = util.asObject(teamFile.toURI().toURL(), Team.class);
-        Assert.assertEquals(bdParsed, borussiaDormund);
+        List<Team> bdParsed = util.asObject(teamFile.toURI().toURL(), List.class);
+        Assert.assertEquals(bdParsed, teams);
     }
 }
