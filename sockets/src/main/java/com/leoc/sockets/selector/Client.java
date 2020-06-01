@@ -1,4 +1,4 @@
-package com.leoc.sockets.selector2;
+package com.leoc.sockets.selector;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
