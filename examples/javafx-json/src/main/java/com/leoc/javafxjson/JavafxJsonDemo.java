@@ -2,7 +2,9 @@ package com.leoc.javafxjson;
 
 import com.leoc.javafxjson.domain.Catalog;
 import com.leoc.javafxjson.json.JsonUtil;
+import com.leoc.javafxjson.persistence.CatalogPersistence;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -27,6 +29,8 @@ public class JavafxJsonDemo extends Application {
     private TableView table = new TableView();
 
     public static void main(String[] args) {
+        Integer value=11;
+        value.equals(11);
         createFile();
 
         launch(args);
@@ -59,14 +63,16 @@ public class JavafxJsonDemo extends Application {
         label.setFont(new Font("Arial", 20));
 
         table.setEditable(true);
-        Catalog catalog = jsonUtil.asObject(catalogFile.toURI().toURL(), Catalog.class);
+        Catalog catalog = new CatalogPersistence().getCatalog("clavos");//donde esta? no
+        //que formato? no
+        //jsonUtil.asObject(catalogFile.toURI().toURL(), Catalog.class);
 
         //a partir de aqui
         for (String column : catalog.getNames()) {
             TableColumn header = new TableColumn(column);
             table.getColumns().addAll(header);
         }
-
+        FXCollections.observableArrayList();
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
