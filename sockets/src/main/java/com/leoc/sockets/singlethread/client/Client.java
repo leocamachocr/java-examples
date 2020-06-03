@@ -10,17 +10,14 @@ public class Client {
 
     public Client(String server, int port) {
         try {
-
-            clientSocket = new Socket(server, port);//
-            Thread.sleep(5000);
+            clientSocket = new Socket(server, port);
             ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-            out.writeObject("Este es mi primer mensaje: "+Thread.currentThread().getName());
+            out.writeObject("Este es mi primer mensaje");
             ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-
             System.out.println(in.readObject());
-        } catch (IOException | ClassNotFoundException | InterruptedException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 clientSocket.close();
             } catch (IOException e) {
