@@ -16,25 +16,7 @@ public class Client {
             Client client = new Client();
             try {
                 client.connect();
-                client.send("My name is Athos");
-                Thread.sleep(5000);
-                client.send("Bye.");
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    client.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-      /*  executor.execute(() -> {
-            Client client = new Client();
-            try {
-                client.connect();
-                client.send("My name is Phortos");
+                client.send("Mi nombre es Athos");
                 Thread.sleep(5000);
                 client.send("Bye.");
             } catch (IOException | InterruptedException e) {
@@ -52,7 +34,7 @@ public class Client {
             Client client = new Client();
             try {
                 client.connect();
-                client.send("My name is Aramys");
+                client.send("Mi nombre es Phortos");
                 Thread.sleep(5000);
                 client.send("Bye.");
             } catch (IOException | InterruptedException e) {
@@ -65,7 +47,25 @@ public class Client {
                 }
             }
 
-        });*/
+        });
+        executor.execute(() -> {
+            Client client = new Client();
+            try {
+                client.connect();
+                client.send("Mi nombre es Aramys");
+                Thread.sleep(5000);
+                client.send("Bye.");
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    client.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
         executor.shutdown();
 
     }
@@ -82,7 +82,7 @@ public class Client {
         buffer.clear();
         channel.read(buffer);
         String response = new String(buffer.array()).trim();
-        System.out.println("response=" + response);
+        System.out.println("respuesta =" + response);
         buffer.clear();
     }
 

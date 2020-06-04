@@ -15,6 +15,7 @@ public class Server {
             while (true) {
                 System.out.println("Esperando conexión");
                 Socket socket = serverSocket.accept();//esperando a que llegue una conexión
+                Thread.sleep(5000);
                 System.out.println("Conexión recibida");
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 String message = (String) in.readObject();
@@ -24,7 +25,7 @@ public class Server {
                 System.out.println("Mensaje recibido:" + message);
                 out.writeObject("Mensaje Recibido: " + message);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             e.printStackTrace();//Puede lanzar una excepción puesto que el puerto puede estar ocupado
         }
 

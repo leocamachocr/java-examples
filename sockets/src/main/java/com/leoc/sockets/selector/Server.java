@@ -1,80 +1,57 @@
 package com.leoc.sockets.selector;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.channels.Selector;
-import java.nio.channels.SelectionKey;
-import java.nio.ByteBuffer;
-import java.io.IOException;
-import java.util.Set;
 import java.util.Iterator;
-import java.net.InetSocketAddress;
+import java.util.Set;
 
 public class Server {
 
-    public static void main (String [] args)
-            throws IOException {
-
-        // Get selector
+    public static void main(String[] args) throws IOException, InterruptedException {
         Selector selector = Selector.open();
-
         System.out.println("Selector open: " + selector.isOpen());
-
-        // Get server socket channel and register with selector
-        ServerSocketChannel serverSocket = ServerSocketChannel.open();
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
-        serverSocket.bind(hostAddress);
-        serverSocket.configureBlocking(false);
-        int ops = serverSocket.validOps();
-        SelectionKey selectKy = serverSocket.register(selector, ops, null);
+        serverSocketChannel.bind(hostAddress);
+        serverSocketChannel.configureBlocking(false);
+        int ops = serverSocketChannel.validOps();
+        serverSocketChannel.register(selector, ops, null);
 
-        for (;;) {
-
-            System.out.println("Waiting for select...");
-            int noOfKeys = selector.select();
-
-            System.out.println("Number of selected keys: " + noOfKeys);
-
-            Set selectedKeys = selector.selectedKeys();
-            Iterator<SelectionKey> iter = selectedKeys.iterator();
-
-            while (iter.hasNext()) {
-
-                SelectionKey ky =iter.next();
-
-                if (ky.isAcceptable()) {
-
-                    // Accept the new client connection
-                    SocketChannel client = serverSocket.accept();
+        while (true) {
+            System.out.println("Esperando seleccionar una conexión...");
+            int numberOfKeys = selector.select();
+            System.out.println("Número de keys: " + numberOfKeys);
+            Set<SelectionKey> selectedKeys = selector.selectedKeys();
+            Iterator<SelectionKey> iterator = selectedKeys.iterator();
+            while (iterator.hasNext()) {
+                SelectionKey selectionKey = iterator.next();
+                if (selectionKey.isAcceptable()) {
+                    SocketChannel client = ((ServerSocketChannel) selectionKey.channel()).accept();
                     client.configureBlocking(false);
-
-                    // Add the new connection to the selector
                     client.register(selector, SelectionKey.OP_READ);
-
-                    System.out.println("Accepted new connection from client: " + client);
-                }
-                else if (ky.isReadable()) {
-
-                    // Read the data from client
-
-                    SocketChannel client = (SocketChannel) ky.channel();
+                    System.out.println("Nueva conexión aceptada: " + client);
+                } else if (selectionKey.isReadable()) {
+                    SocketChannel client = (SocketChannel) selectionKey.channel();
                     ByteBuffer buffer = ByteBuffer.allocate(256);
                     client.read(buffer);
-                    String output = new String(buffer.array()).trim();
-
-                    System.out.println("Message read from client: " + output);
+                    String message = new String(buffer.array()).trim();
+                    Thread.sleep(5000);
+                    System.out.println("Mensaje del cliente: " + message);
                     buffer.flip();
                     client.write(buffer);
                     buffer.clear();
-                    if (output.equals("Bye.")) {
-
-                        client.close();
-                        System.out.println("Client messages are complete; close.");
+                    if (message.equals("Bye.")) {
+                        client.close();//Siempre se debe finalizar la conexión
+                        System.out.println("Mensaje se ha terminado de transmitir; cerrado.");
                     }
+                }
 
-                } // end if (ky...)
-
-                iter.remove();
+                iterator.remove();
 
             } // end while loop
 
