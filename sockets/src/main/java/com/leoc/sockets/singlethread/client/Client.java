@@ -12,7 +12,7 @@ public class Client {
         try {
             clientSocket = new Socket(server, port);
             ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-            out.writeObject("Este es mi primer mensaje");
+            out.writeObject("Este es mi primer mensaje 2");
             ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
             System.out.println(in.readObject());
         } catch (IOException | ClassNotFoundException e) {

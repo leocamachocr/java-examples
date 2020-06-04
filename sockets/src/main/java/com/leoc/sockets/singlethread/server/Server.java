@@ -11,20 +11,28 @@ public class Server {
 
     public Server(int port) {
         try {
+            //aqui
             serverSocket = new ServerSocket(port);
             System.out.println("Esperando conexión");//
-            Socket socket = serverSocket.accept();//esperando a que llegue una conexión
-            System.out.println("Conexión recibida");//
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            String message = (String) in.readObject();
-            System.out.println("Message Recibido: " + message);//
-            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            while(true) {
+                Socket socket = serverSocket.accept();//esperando a que llegue una conexión
+                System.out.println("Conexión recibida");//
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                String message = (String) in.readObject();
+                System.out.println("Message Recibido: " + message);//
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
-            out.writeObject("Mensaje Recibido: " + message);
-            System.out.println("Mensaje Enviado:" + message);//
-
+                out.writeObject("Mensaje Recibido: " + message);
+                System.out.println("Mensaje Enviado:" + message);//
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();//Puede lanzar una excepción puesto que el puerto puede estar ocupado
+        }finally {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

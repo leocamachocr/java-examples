@@ -12,8 +12,8 @@ public class Server {
     public Server(int port) {
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Esperando conexión");
             while (true) {
+                System.out.println("Esperando conexión");
                 Socket socket = serverSocket.accept();//esperando a que llegue una conexión
                 System.out.println("Conexión recibida");
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
