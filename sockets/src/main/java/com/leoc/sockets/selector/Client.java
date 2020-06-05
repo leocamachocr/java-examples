@@ -79,11 +79,13 @@ public class Client {
         ByteBuffer buffer = ByteBuffer.wrap(raw);
         channel.write(buffer);
         System.out.println(message);
+        //fin de escritura
+        //inicia lectura
         buffer.clear();
         channel.read(buffer);
         String response = new String(buffer.array()).trim();
         System.out.println("respuesta =" + response);
-        buffer.clear();
+       // buffer.clear();
     }
 
     private void connect() throws IOException {

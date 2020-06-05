@@ -15,6 +15,7 @@ public class Server {
     public static void main(String[] args) throws IOException, InterruptedException {
         Selector selector = Selector.open();
         System.out.println("Selector open: " + selector.isOpen());
+
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         InetSocketAddress hostAddress = new InetSocketAddress("localhost", 5454);
         serverSocketChannel.bind(hostAddress);
@@ -25,10 +26,10 @@ public class Server {
         while (true) {
             System.out.println("Esperando seleccionar una conexión...");
             int numberOfKeys = selector.select();
-            System.out.println("Número de keys: " + numberOfKeys);
+            System.out.println("Número de solicitudes: " + numberOfKeys);
             Set<SelectionKey> selectedKeys = selector.selectedKeys();
             Iterator<SelectionKey> iterator = selectedKeys.iterator();
-            while (iterator.hasNext()) {
+            while (iterator.hasNext()) {//puede ser un for para simplemente iterar la lista ejemplo: for(SelectionKey selectionKey:selectedKeys)
                 SelectionKey selectionKey = iterator.next();
                 if (selectionKey.isAcceptable()) {
                     SocketChannel client = ((ServerSocketChannel) selectionKey.channel()).accept();
@@ -40,11 +41,20 @@ public class Server {
                     ByteBuffer buffer = ByteBuffer.allocate(256);
                     client.read(buffer);
                     String message = new String(buffer.array()).trim();
-                    Thread.sleep(5000);
+                    Thread.sleep(5000);//guarda el archivo
                     System.out.println("Mensaje del cliente: " + message);
-                    buffer.flip();
+
+                    //Alternativamente podemos enviar otro mensaje
+                    //String response = "Catálogo recibido";
+                    //ByteBuffer responseByteBuffer = ByteBuffer.wrap(response.getBytes());
+                    //client.write(responseByteBuffer);
+
+                    //Pero en este caso estamos enviando el mismo,
+                    // de ahí que necesitemos restaurar las posiciones actuales del byteBuffer utilizado
+                    buffer.flip();//es especial porque retornamos la misma información
                     client.write(buffer);
                     buffer.clear();
+
                     if (message.equals("Bye.")) {
                         client.close();//Siempre se debe finalizar la conexión
                         System.out.println("Mensaje se ha terminado de transmitir; cerrado.");
