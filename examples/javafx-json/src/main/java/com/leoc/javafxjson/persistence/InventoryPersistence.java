@@ -1,32 +1,33 @@
 package com.leoc.javafxjson.persistence;
 
-import com.leoc.javafxjson.domain.Catalog;
 import com.leoc.javafxjson.json.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Map;
 
 import static com.leoc.javafxjson.Resources.BASE_PATH;
 
-public class CatalogPersistence {
+public class InventoryPersistence {
     private static final JsonUtil jsonUtil = new JsonUtil();
     private File sourceFile;
-    //Catalog
+
+    //Inventory -> Map<String,String>
     //JsonUtil
     //File -> Path
     //Tareas:
     // - leer
     // - escribir
 
-    public CatalogPersistence() {
-        sourceFile = new File(BASE_PATH+"/catalog.json");
+    public InventoryPersistence() {
+        sourceFile = new File(BASE_PATH + "/inventory.json");
         System.out.println(sourceFile.getAbsolutePath());//informativo
     }
 
-    public Catalog getCatalog() {
+    public List<Map<String, String>> getInventory() {
         try {
-            return jsonUtil.asObject(sourceFile.toURI().toURL(), Catalog.class);
+            return jsonUtil.asObject(sourceFile.toURI().toURL(), List.class);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return null;//TODO: manejar la excepcion para notificar
@@ -34,7 +35,8 @@ public class CatalogPersistence {
 
     }
 
-    public void save(Catalog catalog) {
-        jsonUtil.toFile(sourceFile, catalog);
+
+    public void save(List<Map<String, String>> inventory) {
+        jsonUtil.toFile(sourceFile, inventory);
     }
 }

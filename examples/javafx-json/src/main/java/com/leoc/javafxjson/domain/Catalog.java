@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Catalog {
+
+    private String catalogName;
     private List<String> names = new ArrayList<>();
 
     public List<String> getNames() {

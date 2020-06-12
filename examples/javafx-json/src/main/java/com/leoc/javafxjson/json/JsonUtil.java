@@ -47,7 +47,7 @@ public class JsonUtil {
         }
     }
 
-    public <T> void toFile( File file,T value) {
+    public <T> void toFile(File file,T value) {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, value);
         } catch (IOException e) {
