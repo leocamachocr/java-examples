@@ -2,6 +2,7 @@ package com.leoc.javafxjson;
 
 import com.leoc.javafxjson.domain.Catalog;
 import com.leoc.javafxjson.persistence.CatalogPersistence;
+import com.leoc.javafxjson.persistence.CatalogPersistenceFile;
 import com.leoc.javafxjson.persistence.InventoryPersistence;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,10 +29,12 @@ import java.util.Map;
  */
 public class JavafxJsonDemo extends Application {
 
-    private static CatalogPersistence catalogPersistence = new CatalogPersistence();
+    private static CatalogPersistence catalogPersistence = new CatalogPersistenceFile();
     private static InventoryPersistence inventoryPersistence = new InventoryPersistence();
 
     private final TableView<Map<String, String>> table = new TableView<>();
+
+
 
     public static void main(String[] args) {
         createCatalogSchema();

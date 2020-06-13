@@ -1,4 +1,4 @@
-package com.leoc.javafxjson;
+package com.leoc.javafxjson.config;
 
 import java.io.IOException;
 import java.net.URL;
